@@ -32,7 +32,7 @@ let state;try{state={...fresh(),...JSON.parse(localStorage.getItem(STORE)||'{}')
 let currentView='learn',session=[],sessionIndex=0,sessionCorrect=0,currentQuestion=null,answered=false,wrongSession=[],wrongIndex=0,wrongAnswered=false;
 function save(){localStorage.setItem(STORE,JSON.stringify(state));renderStats();if(window.cloudReady&&window.cloudNickname)syncCloudStats()}
 // Firebase cloud sharing. Anonymous sign-in happens invisibly; users do not need to create a password.
-const firebaseConfig={apiKey:"AIzaSyCsGJVQwxwK1NXbXJ6aD-00vN6GTnaHIWk",authDomain:"study-app-share.firebaseapp.com",projectId:"study-app-share",storageBucket:"study-app-share.firebasestorage.app",messagingSenderId:"509980638425",appId:"1:509980638425:web:5aca98246df315d45d92c8"};
+const firebaseConfig={apiKey:"AIzaSyCsGJVQwxwK1NXbXJ6aD-OOvN6GTnaHIWk",authDomain:"study-app-share.firebaseapp.com",projectId:"study-app-share",storageBucket:"study-app-share.firebasestorage.app",messagingSenderId:"509980638425",appId:"1:509980638425:web:5aca98246df315d45d92c8"};
 window.cloudReady=false;window.cloudNickname='';let cloudDb=null,cloudUser=null,cloudSyncTimer=null;
 function cloudStatus(text){const el=$('cloudStatus');if(el)el.textContent=text}
 function cloudMessage(text,isError=false){const el=$('cloudMessage');if(el){el.textContent=text;el.style.color=isError?'var(--red)':'var(--muted)'}}
