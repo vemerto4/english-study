@@ -242,6 +242,13 @@ document.addEventListener('input',e=>{
  input.lang=/[가-힣]/.test(input.value)?'ko':'en';
 });
 
+document.addEventListener('input',e=>{
+ const input=e.target;
+ if(currentView!=='learn'||!input.matches('input[data-type-answer]'))return;
+ if(!input.value.trim()){delete input.dataset.autoSpoken;return}
+ if(!input.dataset.autoSpoken){input.dataset.autoSpoken='1';speak(input.dataset.typeAnswer||input.value.trim())}
+});
+
 document.addEventListener('keydown',e=>{
  const target=e.target;
  // 오늘의 학습 / 문장 연습: Enter 첫 번째는 채점, 채점 후 Enter 또는 Tab은 다음 입력칸으로 이동
@@ -252,6 +259,7 @@ document.addEventListener('keydown',e=>{
    const alreadyChecked=!!(result && result.classList.contains('good'));
    if(e.key==='Enter'){
      e.preventDefault();
+     if(!alreadyChecked && currentView==='learn' && target.value.trim()) speak(target.value.trim());
      if(alreadyChecked){
        const inputs=[...document.querySelectorAll('input[data-type-answer]')].filter(el=>!el.disabled && el.offsetParent!==null);
        const i=inputs.indexOf(target); if(i>=0 && inputs[i+1]){inputs[i+1].focus();inputs[i+1].select?.()}
